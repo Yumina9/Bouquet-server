@@ -2,44 +2,44 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
-from flowers.models import Flower
-from flowers.serializers import FlowerSerializer
+from shops.models import Shop
+from shops.serializers import ShopSerializer
 
 @csrf_exempt
-def flower_list(request):
+def shop_list(request):
  
     if request.method == 'GET':
-        flowers = Flower.objects.all()
-        serializer = FlowerSerializer(flowers, many=True)
+        shops = Shop.objects.all()
+        serializer = ShopSerializer(shops, many=True)
         return JsonResponse(serializer.data, safe=False)
 
     elif request.method == 'POST':
         data = JSONParser().parse(request)
-        serializer = FlowerSerializer(data=data)
+        serializer = ShopSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.errors, status=400)
 
 @csrf_exempt
-def flower_detail(request, pk):
+def shop_detail(request, pk):
     try:
-        flower = Flower.objects.get(pk=pk)
-    except Flower.DoesNotExist:
+        shop = Shop.objects.get(pk=pk)
+    except Shop.DoesNotExist:
         return HttpResponse(status=404)
 
     if request.method == 'GET':
-        serializer = FlowerSerializer(flower)
+        serializer = ShopSerializer(shop)
         return JsonResponse(serializer.data)
 
     elif request.method == 'PUT':
         data = JSONParser().parse(request)
-        serializer = FlowerSerializer(flower, data=data)
+        serializer = ShopSerializer(shop, data=data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data)
         return JsonResponse(serializer.errors, status=400)
 
     elif request.method == 'DELETE':
-        flower.delete()
+        shop.delete()
         return HttpResponse(status=204)
