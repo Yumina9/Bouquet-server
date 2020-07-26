@@ -2,16 +2,19 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
+from rest_framework.response import Response
 from shops.models import Shop
 from shops.serializers import ShopSerializer
+from rest_framework.decorators import api_view, renderer_classes
 
-@csrf_exempt
+@api_view(['GET'])
 def shop_list(request):
  
     if request.method == 'GET':
         shops = Shop.objects.all()
         serializer = ShopSerializer(shops, many=True)
-        return JsonResponse(serializer.data, safe=False)
+        return Response(data=serializer.data, status = 200)
+        # return JsonResponse(serializer.data, safe=False)
 
     elif request.method == 'POST':
         data = JSONParser().parse(request)

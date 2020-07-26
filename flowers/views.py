@@ -2,16 +2,20 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
+from rest_framework.response import Response
 from flowers.models import Flower
 from flowers.serializers import FlowerSerializer
+from rest_framework.decorators import api_view, renderer_classes
 
-@csrf_exempt
+
+@api_view(['GET'])
 def flower_list(request):
  
     if request.method == 'GET':
         flowers = Flower.objects.all()
         serializer = FlowerSerializer(flowers, many=True)
-        return JsonResponse(serializer.data, safe=False)
+        # return JsonResponse(serializer.data, safe=False)
+        return Response(data=serializer.data, status=200)
 
     elif request.method == 'POST':
         data = JSONParser().parse(request)
