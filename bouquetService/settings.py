@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'flowers.apps.FlowersConfig',
     'shops.apps.ShopsConfig',
+    'bouquets.apps.BouquetsConfig',
 ]
 
 MIDDLEWARE = [
