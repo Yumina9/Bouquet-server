@@ -41,3 +41,6 @@ def bouquet_detail(request, pk):
     elif request.method == 'DELETE':
         bouquet.delete()
         return Response(status=204)
+
+
+print(BouquetSerializer.data)

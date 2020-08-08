@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '#0fm0b%%c@eua^e3#gw@mclg1i4=f!e6djv80!xpc&6sz=(_k^'
+SECRET_KEY = 'b_jks7b79&x*2-a*0d=c2k(uc3iy#c$4+$+5qcrbzk#c!on#o@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,10 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
-    'flowers.apps.FlowersConfig',
     'shops.apps.ShopsConfig',
+    'flowers.apps.FlowersConfig',
     'bouquets.apps.BouquetsConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -123,5 +123,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-MEDIA_URL = '/media/'
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
