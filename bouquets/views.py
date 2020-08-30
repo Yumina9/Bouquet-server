@@ -5,12 +5,35 @@ from bouquets.models import Bouquet
 from bouquets.serializers import BouquetSerializer 
 from rest_framework.decorators import api_view, renderer_classes
 
+# /bouquets?type=all
+# /bouquets?limit= 
 @api_view(['GET'])
 def bouquet_list(request):
+    # Query Parameter
+
+    limit = None
+    
+    try:
+        limit = request.GET.get('limit', None)
+    except ValueError:
+        pass
+
+    if limit.isdigit():
+        limit = int(limit)
+    else:
+        limit = None
+
     if request.method == 'GET':
-        bouquets = Bouquet.objects.all()
+        if not limit:
+            bouquets = Bouquet.objects.all()
+        else:
+            bouquets = Bouquet.objects.all()[:limit]
         serializer = BouquetSerializer(bouquets, many=True)
         return Response(data=serializer.data, status=200)
+
+
+
+
     elif request.method == 'POST':
         data = JSONParser().parse(request)
         serializer = BouquetSerializer(data=data)
@@ -19,6 +42,10 @@ def bouquet_list(request):
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
 
+# @api_view(['GET'])
+# def bouquet_three(request):
+#     if request.method == 'GET':
+        
 @api_view(['GET', 'PUT', 'DELETE'])
 def bouquet_detail(request, pk):
     try:

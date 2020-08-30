@@ -8,9 +8,23 @@ from rest_framework.decorators import api_view, renderer_classes
 
 @api_view(['GET'])
 def flower_list(request):
- 
+    
+    limit =None
+    try:
+        limit = request.GET.get('limit',None)
+    except ValueError:
+        pass
+
+    if limit.isdigit():
+        limit= int(limit)
+    else:
+        limit = None
+
     if request.method == 'GET':
-        flowers = Flower.objects.all()
+        if not limit:
+            flowers = Flower.objects.all()
+        else:
+            flowers = Flower.objects.all()[:limit]
         serializer = FlowerSerializer(flowers, many=True)
         return Response(data=serializer.data, status=200)
 
@@ -21,6 +35,7 @@ def flower_list(request):
             serializer.save()
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
+
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def flower_detail(request, pk):

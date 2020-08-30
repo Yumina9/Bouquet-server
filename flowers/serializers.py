@@ -12,5 +12,5 @@ class FlowerSerializer(serializers.ModelSerializer):
         response = super().to_representation(instance)
         print(instance)
         print(response) 
-        response['shops'] = FlowerSerializer(instance.shops).data
+        response['shops'] = ShopSerializer(instance.shops).data
         return response
