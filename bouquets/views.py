@@ -14,14 +14,13 @@ def bouquet_list(request):
     limit = None
     
     try:
-        limit = request.GET.get('limit', None)
+        limit = request.GET.get('limit')
     except ValueError:
         pass
 
-    if limit.isdigit():
+    if limit and limit.isdigit():
         limit = int(limit)
-    else:
-        limit = None
+    
 
     if request.method == 'GET':
         if not limit:
