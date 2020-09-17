@@ -82,7 +82,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'bouquetService',
         'USER' : 'root',
-        'PASSWORD' : '1234',
+        'PASSWORD' : '0609',
         'HOST': '127.0.0.1',
         'PORT': '3306',
         'OPTIONS' : {
