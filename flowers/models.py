@@ -7,6 +7,7 @@ class Flower(models.Model):
     season = models.CharField(max_length=20)
     color = models.CharField(max_length=10)
     img = models.ImageField(upload_to="image")
+    price = models.IntegerField(null=True, blank=True)
     shops = models.ForeignKey(Shop, on_delete=models.CASCADE,  null=True, blank=True)
 
 
