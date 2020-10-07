@@ -23,4 +23,6 @@ urlpatterns = [
     path('', include('shops.urls')),
     path('flowers/', include('flowers.urls')),
     path('bouquets/', include('bouquets.urls')),
+    path('ribbons/', include('ribbons.urls')),
+    path('wrappingPapers/', include('wrappingPapers.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

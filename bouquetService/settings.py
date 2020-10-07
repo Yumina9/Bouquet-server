@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
@@ -26,7 +25,6 @@ SECRET_KEY = 'b_jks7b79&x*2-a*0d=c2k(uc3iy#c$4+$+5qcrbzk#c!on#o@'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -40,6 +38,8 @@ INSTALLED_APPS = [
     'shops.apps.ShopsConfig',
     'flowers.apps.FlowersConfig',
     'bouquets.apps.BouquetsConfig',
+    'ribbons.apps.RibbonsConfig',
+    'wrappingPapers.apps.WrappingpapersConfig',
     'rest_framework',
 ]
 
@@ -73,7 +73,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'bouquetService.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
@@ -81,35 +80,37 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'bouquetService',
-        'USER' : 'root',
-        'PASSWORD' : '0609',
+        'USER': 'root',
+        'PASSWORD': '0609',
         'HOST': '127.0.0.1',
         'PORT': '3306',
-        'OPTIONS' : {
+        'OPTIONS': {
             'init_command': "SET sql_mode = 'STRICT_TRANS_TABLES'",
         },
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -123,7 +124,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = False
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
