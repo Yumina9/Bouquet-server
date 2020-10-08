@@ -9,4 +9,4 @@ class WrappingPaper(models.Model):
     shops = models.ForeignKey(Shop, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.color + " " + self.name
+        return self.name
