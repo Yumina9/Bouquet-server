@@ -12,11 +12,6 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             model_name='bouquet',
-            name='flower_price',
-            field=models.IntegerField(blank=True, null=True),
-        ),
-        migrations.AddField(
-            model_name='bouquet',
             name='price',
             field=models.IntegerField(blank=True, null=True),
         ),

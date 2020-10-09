@@ -12,18 +12,8 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             model_name='bouquet',
-            name='flower_color',
-            field=models.CharField(blank=True, max_length=10, null=True),
-        ),
-        migrations.AddField(
-            model_name='bouquet',
             name='flower_count',
             field=models.IntegerField(blank=True, max_length=10, null=True),
-        ),
-        migrations.AddField(
-            model_name='bouquet',
-            name='flower_name',
-            field=models.CharField(blank=True, max_length=100, null=True),
         ),
         migrations.AddField(
             model_name='bouquet',
