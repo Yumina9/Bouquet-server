@@ -89,3 +89,52 @@ def shop_detail_bouquets(request, pk):
         serializer = BouquetSerializer(query, many=True)
         return Response(serializer.data, status=200)
         
+@api_view(['GET', 'PUT', 'DELETE'])
+def shop_flower_detail(request, shop_id, flower_id):
+    try:
+        flower = Flower.objects.get(shop_id=shop_id, flower_id=flower_id).query
+    except Flower.DoesNotExist:
+        return Response(status=404)
+    print(MyModel.objects.filter(shop_id=shop_id, flower_id=flower_id).query)
+
+    if request.method == 'GET':
+        serializer = FlowerSerializer(flower)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        data = JSONParser().parse(request)
+        serializer = FlowerSerializer(flower, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
+
+    elif request.method == 'DELETE':
+        flower.delete()
+        return Response(status=204)
+
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def shop_bouquet_detail(request, shop_id, bouquet_id):
+    try:
+        bouquet = Bouquet.objects.get(shop_id=shop_id, bouquet_id=bouquet_id).query
+    except Bouquet.DoesNotExist:
+        return Response(status=404)
+    print(MyModel.objects.filter(shop_id=shop_id, bouquet_id=bouquet_id).query)
+
+    if request.method == 'GET':
+        serializer = BouquetSerializer(bouquet)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        data = JSONParser().parse(request)
+        serializer = BouquetSerializer(bouquet, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
+
+    elif request.method == 'DELETE':
+        bouquet.delete()
+        return Response(status=204)
+        
