@@ -1,10 +1,9 @@
 from django.shortcuts import render
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
-from flowers.models import Flower
-from flowers.serializers import FlowerSerializer
+from ribbons.models import Ribbon
+from ribbons.serializers import RibbonSerializer
 from rest_framework.decorators import api_view, renderer_classes
-
 
 @api_view(['GET'])
 def ribbon_list(request):
@@ -24,7 +23,7 @@ def ribbon_list(request):
             ribbons = Ribbon.objects.all()
         else:
             ribbons = Ribbon.objects.all()[:limit]
-        serializer = RibbonSerializer(bouquets, many=True)
+        serializer = RibbonSerializer(ribbons, many=True)
         return Response(data=serializer.data, status=200)
 
 
