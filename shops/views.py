@@ -8,6 +8,8 @@ from shops.serializers import ShopSerializer
 from rest_framework.decorators import api_view, renderer_classes
 from flowers.serializers import FlowerSerializer
 from bouquets.serializers import BouquetSerializer
+from ribbons.serializers import RibbonSerializer
+from wrappingPapers.serializers import WrappingPaperSerializer
 
 @api_view(['GET'])
 def shop_list(request):
@@ -33,6 +35,7 @@ def shop_list(request):
 @csrf_exempt
 @api_view(['GET', 'PUT', 'DELETE'])
 def shop_detail(request, pk):
+
     try:
         shop = Shop.objects.get(pk=pk)
     except Shop.DoesNotExist:
@@ -57,7 +60,7 @@ def shop_detail(request, pk):
         return HttpResponse(status=204)
 
 @api_view(['GET'])
-def shop_detail_flowers(request, pk):
+def shop_flowers_list(request, pk):
     '''
     가게에 등록된 꽃 데이터 조회
     http://localhost:8000/shop/1/flowers
@@ -74,7 +77,7 @@ def shop_detail_flowers(request, pk):
 
 
 @api_view(['GET'])
-def shop_detail_bouquets(request, pk):
+def shop_bouquets_list(request, pk):
     '''
     가게에 등록된 꽃다발 데이터 조회
     http://localhost:8000/shop/1/bouquets
@@ -88,7 +91,40 @@ def shop_detail_bouquets(request, pk):
         query = shop.bouquet_set.all()
         serializer = BouquetSerializer(query, many=True)
         return Response(serializer.data, status=200)
-        
+
+@api_view(['GET'])
+def shop_ribbons_list(request, pk):
+    '''
+    가게에 등록된 리본 데이터 조회
+    http://localhost:8000/shop/1/ribbons
+    '''
+    try:
+        shop = Shop.objects.get(pk=pk)
+    except Shop.DoesNotExist:
+        return HttpResponse(status=400)
+
+    if request.method =='GET':
+        query = shop.ribbon_set.all()
+        serializer = RibbonSerializer(query, many=True)
+        return Response(serializer.data, status=200)
+
+@api_view(['GET'])
+def shop_wrappingPaper_list(request, pk):
+    '''
+    가게에 등록된 포장지 데이터 조회
+    http://localhost:8000/shop/1/wrappingPapers
+    '''
+    try:
+        shop = Shop.objects.get(pk=pk)
+    except Shop.DoesNotExist:
+        return HttpResponse(status=400)
+
+    if request.method =='GET':
+        query = shop.wrappingpaper_set.all()
+        serializer = WrappingPaperSerializer(query, many=True)
+        return Response(serializer.data, status=200)
+
+
 @api_view(['GET', 'PUT', 'DELETE'])
 def shop_flower_detail(request, shop_id, flower_id):
     try:
