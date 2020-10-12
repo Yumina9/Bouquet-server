@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
-from flowers.models import Flower
-from flowers.serializers import FlowerSerializer
+from wrappingPapers.models import WrappingPaper
+from wrappingPapers.serializers import WrappingPaperSerializer
 from rest_framework.decorators import api_view, renderer_classes
 
 
