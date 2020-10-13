@@ -18,6 +18,10 @@ from django.urls import include, path, re_path
 from django.conf.urls.static import static
 from django.conf import settings
 
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('shops.urls')),
@@ -25,6 +29,8 @@ urlpatterns = [
     path('bouquets/', include('bouquets.urls')),
     path('ribbons/', include('ribbons.urls')),
     path('wrappingPapers/', include('wrappingPapers.urls')),
-    re_path(r'^rest-auth/', include('rest_auth.urls')),
-    re_path(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
+    path('api/user/', include('users.urls', namespace='users')),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
