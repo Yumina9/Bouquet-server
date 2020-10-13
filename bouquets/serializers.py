@@ -8,7 +8,7 @@ class BouquetSerializer(serializers.ModelSerializer):
 
     flower = FlowerSerializer(many=True, read_only=True)
     ribbon = RibbonSerializer(many=True, read_only=True)
-    wrappingPaper = WrappingPaperSerializer(many=True, read_only=True)
+    wrappingpaper = WrappingPaperSerializer(many=True, read_only=True)
     class Meta:
         model=Bouquet
         fields='__all__'
