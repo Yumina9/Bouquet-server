@@ -126,12 +126,12 @@ def shop_wrappingPaper_list(request, pk):
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
-def shop_flower_detail(request, shop_id, flower_id):
+def shop_flower_detail(request, shops_id, id):
     try:
-        flower = Flower.objects.get(shop_id=shop_id, flower_id=flower_id).query
+        flower = Flower.objects.get(shops_id=shops_id, id=id)
     except Flower.DoesNotExist:
         return Response(status=404)
-    print(MyModel.objects.filter(shop_id=shop_id, flower_id=flower_id).query)
+    print(MyModel.objects.filter(shops_id=shops_id, id=id))
 
     if request.method == 'GET':
         serializer = FlowerSerializer(flower)
@@ -151,12 +151,12 @@ def shop_flower_detail(request, shop_id, flower_id):
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
-def shop_bouquet_detail(request, shop_id, bouquet_id):
+def shop_bouquet_detail(request, shops_id, id):
     try:
-        bouquet = Bouquet.objects.get(shop_id=shop_id, bouquet_id=bouquet_id).query
+        bouquet = Bouquet.objects.get(shops_id=shops_id, id=id)
     except Bouquet.DoesNotExist:
         return Response(status=404)
-    print(MyModel.objects.filter(shop_id=shop_id, bouquet_id=bouquet_id).query)
+    print(MyModel.objects.filter(shops_id=shops_id, id=id))
 
     if request.method == 'GET':
         serializer = BouquetSerializer(bouquet)
