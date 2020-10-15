@@ -1,10 +1,14 @@
 from rest_framework import serializers
 from shops.models import Shop
-from bouquets.serializers import BouquetSerializer
 from bouquets.models import Bouquet
 from flowers.models import Flower
-from flowers.serializers import FlowerSerializer
+from ribbons.models import Ribbon
+from wrappingPapers.models import WrappingPaper
 
+from bouquets.serializers import BouquetSerializer
+from flowers.serializers import FlowerSerializer
+from ribbons.serializers import RibbonSerializer
+from wrappingPapers.serializers import WrappingPaperSerializer
 
 class ShopSerializer(serializers.ModelSerializer):
 
@@ -13,6 +17,14 @@ class ShopSerializer(serializers.ModelSerializer):
 
     flowers = serializers.SerializerMethodField(
         source='flower_set', read_only=True)
+
+    ribbons = serializers.SerializerMethodField(
+        source='ribbon_set', read_only=True
+    )
+
+    wrappingPapers = serializers.SerializerMethodField(
+        source='wrappingPaper_set', read_only=True
+    )
 
     class Meta:
         model=Shop
@@ -27,4 +39,15 @@ class ShopSerializer(serializers.ModelSerializer):
     def get_flowers(self, obj):
         query = Flower.objects.filter(shops__id=obj.id)[:3]
         serializer = FlowerSerializer(query, many=True)
+        return serializer.data
+
+    # 여기가 없어쑴
+    def get_ribbons(self, obj):
+        query = Ribbon.objects.filter(shops__id=obj.id)[:3]
+        serializer = RibbonSerializer(query, many=True)
+        return serializer.data
+
+    def get_wrappingPapers(self, obj):
+        query= WrappingPaper.objects.filter(shops__id=obj.id)[:3]
+        serializer = WrappingPaperSerializer(query, many=True)
         return serializer.data

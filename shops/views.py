@@ -6,7 +6,9 @@ from rest_framework.response import Response
 from shops.models import Shop
 from shops.serializers import ShopSerializer
 from rest_framework.decorators import api_view, renderer_classes
+from flowers.models import Flower
 from flowers.serializers import FlowerSerializer
+from bouquets.models import Bouquet
 from bouquets.serializers import BouquetSerializer
 from ribbons.serializers import RibbonSerializer
 from wrappingPapers.serializers import WrappingPaperSerializer
@@ -126,12 +128,12 @@ def shop_wrappingPaper_list(request, pk):
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
-def shop_flower_detail(request, shop_id, flower_id):
+def shop_flower_detail(request, shops_id, id):
     try:
-        flower = Flower.objects.get(shop_id=shop_id, flower_id=flower_id).query
+        flower = Flower.objects.get(shops_id=shops_id, id=id)
     except Flower.DoesNotExist:
         return Response(status=404)
-    print(MyModel.objects.filter(shop_id=shop_id, flower_id=flower_id).query)
+    print(Flower.objects.filter(shops_id=shops_id, id=id))
 
     if request.method == 'GET':
         serializer = FlowerSerializer(flower)
@@ -151,12 +153,12 @@ def shop_flower_detail(request, shop_id, flower_id):
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
-def shop_bouquet_detail(request, shop_id, bouquet_id):
+def shop_bouquet_detail(request, shops_id, id):
     try:
-        bouquet = Bouquet.objects.get(shop_id=shop_id, bouquet_id=bouquet_id).query
+        bouquet = Bouquet.objects.get(shops_id=shops_id, id=id)
     except Bouquet.DoesNotExist:
         return Response(status=404)
-    print(MyModel.objects.filter(shop_id=shop_id, bouquet_id=bouquet_id).query)
+    print(Bouquet.objects.filter(shops_id=shops_id, id=id))
 
     if request.method == 'GET':
         serializer = BouquetSerializer(bouquet)

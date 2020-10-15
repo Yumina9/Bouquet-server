@@ -6,20 +6,20 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 
 class CustomAccountManager(BaseUserManager):
 
-    # def create_superuser(self, email, username, first_name, password, **other_fields):
+    def create_superuser(self, email, username, first_name, password, **other_fields):
 
-    #     other_fields.setdefault('is_staff', True)
-    #     other_fields.setdefault('is_superuser', True)
-    #     other_fields.setdefault('is_active', True)
+        other_fields.setdefault('is_staff', True)
+        other_fields.setdefault('is_superuser', True)
+        other_fields.setdefault('is_active', True)
 
-    #     if other_fields.get('is_staff') is not True:
-    #         raise ValueError(
-    #             'Superuser must be assigned to is_staff=True.')
-    #     if other_fields.get('is_superuser') is not True:
-    #         raise ValueError(
-    #             'Superuser must be assigned to is_superuser=True.')
+        if other_fields.get('is_staff') is not True:
+            raise ValueError(
+                'Superuser must be assigned to is_staff=True.')
+        if other_fields.get('is_superuser') is not True:
+            raise ValueError(
+                'Superuser must be assigned to is_superuser=True.')
 
-    #     return self.create_user(email, username, first_name, password, **other_fields)
+        return self.create_user(email, username, first_name, password, **other_fields)
 
     def create_user(self, email, username, first_name, password, **other_fields):
 
@@ -34,8 +34,7 @@ class CustomAccountManager(BaseUserManager):
         return user
 
 
-class NewUser(AbstractBaseUser, PermissionsMixin):
-    # user_id = models.CharField(primary_key=True, max_length=10)
+class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email address'), unique=True)
     username = models.CharField(max_length=150, unique=True)
     first_name = models.CharField(max_length=150, blank=True)
