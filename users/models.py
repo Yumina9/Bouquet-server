@@ -43,8 +43,14 @@ class User(AbstractBaseUser, PermissionsMixin):
         'about'), max_length=500, blank=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
-
+    # user_choice = models.CharField(max_length=1)
     objects = CustomAccountManager()
+    USER_CHOICE = (
+        ('U', 'User'),
+        ('S', 'Shop'),
+    )
+    user_choice = models.CharField(max_length=1, choices=USER_CHOICE)
+   
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'first_name']

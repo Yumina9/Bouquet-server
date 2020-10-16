@@ -12,9 +12,9 @@ class UserAdminConfig(UserAdmin):
     list_filter = ('email', 'username', 'first_name', 'is_active', 'is_staff')
     ordering = ('-start_date',)
     list_display = ('email', 'username', 'first_name',
-                    'is_active', 'is_staff')
+                    'is_active', 'is_staff', 'user_choice')
     fieldsets = (
-        (None, {'fields': ('email', 'username', 'first_name',)}),
+        (None, {'fields': ('email', 'username', 'first_name','user_choice',)}),
         ('Permissions', {'fields': ('is_staff', 'is_active')}),
         ('Personal', {'fields': ('about',)}),
     )
