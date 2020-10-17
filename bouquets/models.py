@@ -17,6 +17,7 @@ class Bouquet(models.Model):
     wrappingpaper = models.ManyToManyField(
         WrappingPaper, null=True, blank=True)
     flower_count = models.IntegerField(null=True, blank=True)
+    resultPrice = models.IntegerField(null=True, blank=True)
     shops = models.ForeignKey(
         Shop, on_delete=models.CASCADE, null=True, blank=True)
 
