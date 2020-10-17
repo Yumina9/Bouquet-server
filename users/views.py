@@ -13,6 +13,8 @@ from django.shortcuts import get_object_or_404
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
+from rest_framework.authentication import TokenAuthentication
+from rest_framework import status,permissions
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
@@ -37,6 +39,10 @@ class MyTokenObtainPairView(TokenObtainPairView):
 
 class UserViewSet(viewsets.ViewSet):
 
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = UserSerializer
+
     def list(self, request):
         queryset = User.objects.all()
         serializer = UserSerializer(queryset, many=True)
@@ -47,6 +53,12 @@ class UserViewSet(viewsets.ViewSet):
         user = get_object_or_404(queryset, pk=pk)
         serializer = UserSerializer(user)
         return Response(serializer.data)
+
+
+    def get_queryset(self):
+        queryset = User.objects.all()
+        id = self.request.user.id
+        return User.objects.filter(id=id)
 
 class CustomUserCreate(APIView):
     permission_classes = [AllowAny]

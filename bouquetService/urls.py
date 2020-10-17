@@ -49,6 +49,7 @@ urlpatterns = [
     path('bouquets/', include('bouquets.urls')),
     path('ribbons/', include('ribbons.urls')),
     path('wrappingPapers/', include('wrappingPapers.urls')),
+    # API
     path('api/user/', include('users.urls', namespace='users')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api/token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
