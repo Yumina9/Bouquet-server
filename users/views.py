@@ -9,12 +9,12 @@ from rest_framework import viewsets
 from .models import User
 from .serializers import UserSerializer
 from django.shortcuts import get_object_or_404
-
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
-
 from rest_framework.authentication import TokenAuthentication
 from rest_framework import status,permissions
+from rest_framework.permissions import IsAuthenticated
+
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
@@ -86,3 +86,9 @@ class BlacklistTokenUpdateView(APIView):
         except Exception as e:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
+class UserView(APIView):
+    permission_classes= (IsAuthenticated,)
+
+    def get(self, request):
+        serializer = UserSerializer(request.user)
+        return Response(serializer.data)

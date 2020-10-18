@@ -49,10 +49,10 @@ class User(AbstractBaseUser, PermissionsMixin):
         ('U', 'User'),
         ('S', 'Shop'),
     )
-    user_choice = models.CharField(max_length=1, choices=USER_CHOICE)
-    user_phone = models.CharField(max_length=13, null=True)
-    zip_code = models.CharField(max_length=5, null=True)
-    user_address = models.CharField(max_length=200, null=True)
+    user_choice = models.CharField(max_length=1, choices=USER_CHOICE, null=True)
+    user_phone = models.CharField(max_length=13, null=True, blank=True)
+    zip_code = models.CharField(max_length=5, null=True , blank=True)
+    user_address = models.CharField(max_length=200, null=True , blank=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'first_name']
