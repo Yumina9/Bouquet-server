@@ -8,10 +8,11 @@ router = DefaultRouter()
 router.register(r'users', UserViewSet, basename='user')
 
 urlpatterns = [
+    path('me/', views.UserView.as_view()),
     path('create/', CustomUserCreate.as_view(), name="create_user"),
     path('logout/blacklist/', BlacklistTokenUpdateView.as_view(),
          name='blacklist'),
     # path('users/', UserViewSet.as_view()),
 ]
 
-urlpatterns = router.urls
+urlpatterns += router.urls

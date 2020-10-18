@@ -82,18 +82,30 @@ WSGI_APPLICATION = 'bouquetService.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'bouquetService',
-        'USER': 'root',
-        'PASSWORD': '0609',
-        'HOST': '127.0.0.1',
+        'NAME': 'bouquet_service_db',
+        'USER': 'bouquetdb@bouquet-service-db',
+        'PASSWORD': 'bouquetService-db',
+        'HOST': 'bouquet-service-db.mysql.database.azure.com',
         'PORT': '3306',
         'OPTIONS': {
             'init_command': "SET sql_mode = 'STRICT_TRANS_TABLES'",
         },
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'bouquetService',
+    #     'USER': 'root',
+    #     'PASSWORD': '0609',
+    #     'HOST': '127.0.0.1',
+    #     'PORT': '3306',
+    #     'OPTIONS': {
+    #         'init_command': "SET sql_mode = 'STRICT_TRANS_TABLES'",
+    #     },
+    # }
 }
 
 # Password validation
@@ -158,7 +170,7 @@ CORS_ALLOWED_ORIGINS = [
 AUTH_USER_MODEL = "users.User"
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1),
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=10),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=10),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
