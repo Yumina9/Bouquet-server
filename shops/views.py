@@ -133,11 +133,7 @@ def shop_flower_detail(request, shops_id, id):
         flower = Flower.objects.get(shops_id=shops_id, id=id)
     except Flower.DoesNotExist:
         return Response(status=404)
-<<<<<<< HEAD
-    print(MyModel.objects.filter(shops_id=shops_id, id=id))
-=======
     print(Flower.objects.filter(shops_id=shops_id, id=id))
->>>>>>> master
 
     if request.method == 'GET':
         serializer = FlowerSerializer(flower)
@@ -162,11 +158,7 @@ def shop_bouquet_detail(request, shops_id, id):
         bouquet = Bouquet.objects.get(shops_id=shops_id, id=id)
     except Bouquet.DoesNotExist:
         return Response(status=404)
-<<<<<<< HEAD
-    print(MyModel.objects.filter(shops_id=shops_id, id=id))
-=======
     print(Bouquet.objects.filter(shops_id=shops_id, id=id))
->>>>>>> master
 
     if request.method == 'GET':
         serializer = BouquetSerializer(bouquet)

@@ -6,8 +6,8 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        # fields = ('id', 'email', 'username', 'first_name', 'user_choice', 'user_phone', 'zip_code', 'user_address')
-        fields = "__all__"
+        fields = ('id', 'email', 'username', 'first_name', 'user_choice', 'user_phone', 'zip_code', 'user_address', 'shop')
+        # fields = "__all__"
 class CustomUserSerializer(serializers.ModelSerializer):
     """
     Currently unused in preference of the below.
@@ -21,13 +21,8 @@ class CustomUserSerializer(serializers.ModelSerializer):
     zip_code = serializers.CharField(max_length=5)
     user_address = serializers.CharField(max_length=200)
     class Meta:
-<<<<<<< HEAD
-        model = NewUser
-        fields = ('email', 'user_id', 'username', 'password')
-=======
         model = User
         fields = ('email', 'username', 'password', 'user_choice', 'user_phone', 'zip_code', 'user_address')
->>>>>>> master
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):

@@ -7,16 +7,6 @@ from django.db import models
 
 
 class UserAdminConfig(UserAdmin):
-<<<<<<< HEAD
-    model = NewUser
-    search_fields = ('email', 'user_id', 'username', 'first_name',)
-    list_filter = ('email', 'user_id', 'username', 'first_name', 'is_active', 'is_staff')
-    ordering = ('-start_date',)
-    list_display = ('email', 'user_id', 'username', 'first_name',
-                    'is_active', 'is_staff')
-    fieldsets = (
-        (None, {'fields': ('email', 'user_id', 'username', 'first_name',)}),
-=======
     model = User
     search_fields = ('email', 'username', 'first_name',)
     list_filter = ('email', 'username', 'first_name', 'user_choice', 'user_phone', 'zip_code', 'user_address')
@@ -26,7 +16,6 @@ class UserAdminConfig(UserAdmin):
     #admin/users/선택후 변경이 가능한 화면
     fieldsets = (
         (None, {'fields': ('email', 'username', 'first_name','user_choice', 'user_phone', 'zip_code', 'user_address')}),
->>>>>>> master
         ('Permissions', {'fields': ('is_staff', 'is_active')}),
         ('Personal', {'fields': ('about',)}),
     )
@@ -36,11 +25,7 @@ class UserAdminConfig(UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-<<<<<<< HEAD
-            'fields': ('email', 'user_id', 'username', 'first_name', 'password1', 'password2', 'is_active', 'is_staff')}
-=======
             'fields': ('email', 'username', 'first_name', 'password1', 'password2','user_choice', 'user_phone', 'zip_code', 'user_address')}
->>>>>>> master
          ),
     )
 
