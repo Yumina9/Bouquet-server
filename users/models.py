@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
-
+from shops.models import Shop
 
 class CustomAccountManager(BaseUserManager):
 
@@ -53,6 +53,15 @@ class User(AbstractBaseUser, PermissionsMixin):
     user_phone = models.CharField(max_length=13, null=True, blank=True)
     # zip_code = models.CharField(max_length=5, null=True , blank=True)
     # user_address = models.CharField(max_length=200, null=True , blank=True)
+
+
+    shop = models.OneToOneField(
+        Shop,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
+
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'first_name']
