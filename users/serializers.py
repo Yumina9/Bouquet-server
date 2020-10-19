@@ -6,8 +6,9 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        # fields = ('id', 'email', 'username', 'first_name', 'user_choice', 'user_phone', 'zip_code', 'user_address')
-        fields = "__all__"
+        fields = ('id', 'email', 'username', 'first_name', 'user_choice', 'user_phone', 'zip_code', 'user_address', 'shop',)
+        # fields = "__all__"
+
 class CustomUserSerializer(serializers.ModelSerializer):
     """
     Currently unused in preference of the below.
