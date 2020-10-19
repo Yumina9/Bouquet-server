@@ -6,7 +6,9 @@ from rest_framework.response import Response
 from shops.models import Shop
 from shops.serializers import ShopSerializer
 from rest_framework.decorators import api_view, renderer_classes
+from flowers.models import Flower
 from flowers.serializers import FlowerSerializer
+from bouquets.models import Bouquet
 from bouquets.serializers import BouquetSerializer
 from ribbons.serializers import RibbonSerializer
 from wrappingPapers.serializers import WrappingPaperSerializer
@@ -131,7 +133,11 @@ def shop_flower_detail(request, shops_id, id):
         flower = Flower.objects.get(shops_id=shops_id, id=id)
     except Flower.DoesNotExist:
         return Response(status=404)
+<<<<<<< HEAD
     print(MyModel.objects.filter(shops_id=shops_id, id=id))
+=======
+    print(Flower.objects.filter(shops_id=shops_id, id=id))
+>>>>>>> master
 
     if request.method == 'GET':
         serializer = FlowerSerializer(flower)
@@ -156,7 +162,11 @@ def shop_bouquet_detail(request, shops_id, id):
         bouquet = Bouquet.objects.get(shops_id=shops_id, id=id)
     except Bouquet.DoesNotExist:
         return Response(status=404)
+<<<<<<< HEAD
     print(MyModel.objects.filter(shops_id=shops_id, id=id))
+=======
+    print(Bouquet.objects.filter(shops_id=shops_id, id=id))
+>>>>>>> master
 
     if request.method == 'GET':
         serializer = BouquetSerializer(bouquet)

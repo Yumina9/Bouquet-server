@@ -44,7 +44,10 @@ INSTALLED_APPS = [
     'corsheaders',
     'users',
     'rest_framework_simplejwt.token_blacklist',
-    
+    'django_extensions',
+    'drf_yasg',
+    'storages',
+
 ]
 
 MIDDLEWARE = [
@@ -81,18 +84,30 @@ WSGI_APPLICATION = 'bouquetService.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'bouquetService',
-        'USER': 'root',
-        'PASSWORD': '0609',
-        'HOST': '127.0.0.1',
+        'NAME': 'bouquet_service_db',
+        'USER': 'bouquetdb@bouquet-service-db',
+        'PASSWORD': 'bouquetService-db',
+        'HOST': 'bouquet-service-db.mysql.database.azure.com',
         'PORT': '3306',
         'OPTIONS': {
             'init_command': "SET sql_mode = 'STRICT_TRANS_TABLES'",
         },
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'bouquetService',
+    #     'USER': 'root',
+    #     'PASSWORD': '0609',
+    #     'HOST': '127.0.0.1',
+    #     'PORT': '3306',
+    #     'OPTIONS': {
+    #         'init_command': "SET sql_mode = 'STRICT_TRANS_TABLES'",
+    #     },
+    # }
 }
 
 # Password validation
@@ -133,12 +148,25 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
+# MEDIA_URL = '/media/'
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+
+
+DEFAULT_FILE_STORAGE = 'bouquetService.custom_azure.AzureMediaStorage'
+STATICFILES_STORAGE = 'bouquetService.custom_azure.AzureStaticStorage'
+
+STATIC_LOCATION = "static"
+MEDIA_LOCATION = "media"
+
+AZURE_ACCOUNT_NAME = "bouquetserviceimage"
+AZURE_CUSTOM_DOMAIN = f'bouquetserviceimage.blob.core.windows.net'
+STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
+MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{MEDIA_LOCATION}/'
+
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
@@ -154,10 +182,10 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 # Custom user model
-AUTH_USER_MODEL = "users.NewUser"
+AUTH_USER_MODEL = "users.User"
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1),
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=10),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=10),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
@@ -165,8 +193,12 @@ SIMPLE_JWT = {
     'SIGNING_KEY': SECRET_KEY,
     'VERIFYING_KEY': None,
     'AUTH_HEADER_TYPES': ('JWT',),
-    'USER_ID_FIELD': 'id',
+    'USER_ID_FIELD': 'email',
     'USER_ID_CLAIM': 'user_id',
     'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
     'TOKEN_TYPE_CLAIM': 'token_type',
 }
+
+# 로그인 후에 해당 경로로 이동
+# 기본으로는 원래 account/profile 로 이동한다.
+LOGIN_REDIRECT_URL='/'
