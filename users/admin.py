@@ -9,13 +9,13 @@ from django.db import models
 class UserAdminConfig(UserAdmin):
     model = User
     search_fields = ('email', 'username', 'first_name')
-    list_filter = ('email', 'username', 'first_name', 'user_choice', 'user_phone')
+    list_filter = ('email', 'username', 'first_name', 'user_choice', 'user_phone', 'shop')
     ordering = ('-start_date',)
     #장고 어드민에서 보여지는 화면
-    list_display = ('email', 'username', 'first_name', 'user_choice', 'user_phone')
+    list_display = ('email', 'username', 'first_name', 'user_choice', 'user_phone', 'shop')
     #admin/users/선택후 변경이 가능한 화면
     fieldsets = (
-        (None, {'fields': ('email', 'username', 'first_name','user_choice', 'user_phone')}),
+        (None, {'fields': ('email', 'username', 'first_name','user_choice', 'user_phone', 'shop')}),
         ('Permissions', {'fields': ('is_staff', 'is_active')}),
         ('Personal', {'fields': ('about',)}),
     )
