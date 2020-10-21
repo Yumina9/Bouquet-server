@@ -23,6 +23,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
     Currently unused in preference of the below.
     """
     email = serializers.EmailField(required=True)
+    # user_id = serializers.CharField(required=True)
     username = serializers.CharField(required=True)
     password = serializers.CharField(min_length=8, write_only=True)
     user_choice = serializers.CharField(max_length=1)

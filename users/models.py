@@ -22,7 +22,7 @@ class CustomAccountManager(BaseUserManager):
         return self.create_user(email, username, first_name, password, **other_fields)
 
     def create_user(self, email, username, first_name, password, **other_fields):
-
+    
         if not email:
             raise ValueError(_('You must provide an email address'))
 
