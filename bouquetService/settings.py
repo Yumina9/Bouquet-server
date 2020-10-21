@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'bouquets.apps.BouquetsConfig',
     'ribbons.apps.RibbonsConfig',
     'wrappingPapers.apps.WrappingpapersConfig',
+    'bouquet_order.apps.BouquetOrderConfig',
     'rest_framework',
     'corsheaders',
     'users',
