@@ -4,11 +4,13 @@ from bouquets.models import Bouquet
 from flowers.models import Flower
 from ribbons.models import Ribbon
 from wrappingPapers.models import WrappingPaper
+from bouquet_order.models import Bouquet_order
 
 from bouquets.serializers import BouquetSerializer
 from flowers.serializers import FlowerSerializer
 from ribbons.serializers import RibbonSerializer
 from wrappingPapers.serializers import WrappingPaperSerializer
+from bouquet_order.serializers import BouquetOrderSerializer
 
 class ShopSerializer(serializers.ModelSerializer):
 
@@ -24,6 +26,10 @@ class ShopSerializer(serializers.ModelSerializer):
 
     wrappingPapers = serializers.SerializerMethodField(
         source='wrappingPaper_set', read_only=True
+    )
+
+    bouquet_order = serializers.SerializerMethodField(
+        source='bouquet_order_set', read_only=True
     )
 
     class Meta:
@@ -50,4 +56,9 @@ class ShopSerializer(serializers.ModelSerializer):
     def get_wrappingPapers(self, obj):
         query= WrappingPaper.objects.filter(shops__id=obj.id)[:3]
         serializer = WrappingPaperSerializer(query, many=True)
+        return serializer.data
+
+    def get_bouquet_order(self, obj):
+        query= Bouquet_order.objects.filter(shops__id=obj.id)[:5]
+        serializer = BouquetOrderSerializer(query, many=True)
         return serializer.data
