@@ -2,6 +2,7 @@ from django.db import models
 
 class Shop(models.Model):
     name = models.CharField(max_length=50)
+    img = models.ImageField(upload_to='image', null=True, blank=True)
     location = models.CharField(max_length=200)
     florist = models.CharField(max_length=50)
     description = models.CharField(max_length=300)
