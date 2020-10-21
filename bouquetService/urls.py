@@ -49,6 +49,7 @@ urlpatterns = [
     path('bouquets/', include('bouquets.urls')),
     path('ribbons/', include('ribbons.urls')),
     path('wrappingPapers/', include('wrappingPapers.urls')),
+    path('bouquet_order/', include('bouquet_order.urls')),
     # API
     path('api/user/', include('users.urls', namespace='users')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
