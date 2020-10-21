@@ -1,13 +1,22 @@
 from rest_framework import serializers
 from users.models import User
+from bouquet_order.models import Bouquet_order
+from bouquet_order.serializers import BouquetOrderSerializer
 
 
 class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'email', 'username', 'first_name', 'user_choice', 'user_phone', 'zip_code', 'user_address', 'shop',)
+        fields = ('id', 'email', 'username', 'first_name', 'user_choice', 'user_phone', 'zip_code', 'user_address', 'shop','bouquet_order')
         # fields = "__all__"
+
+    bouquet_order = serializers.SerializerMethodField(source='bouquet_order_set', read_only=True)
+
+    def get_bouquet_order(self, obj):
+        query= Bouquet_order.objects.filter(shops__id=obj.id)[:5]
+        serializer = BouquetOrderSerializer(query, many=True)
+        return serializer.data
 
 class CustomUserSerializer(serializers.ModelSerializer):
     """

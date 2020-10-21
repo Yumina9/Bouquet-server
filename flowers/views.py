@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from flowers.models import Flower
@@ -35,7 +35,7 @@ def flower_list(request):
         return Response(serializer.errors, status=400)
 
 
-@api_view(['GET', 'PUT', 'DELETE'])
+@api_view(['GET', 'POST', 'PUT', 'DELETE'])
 def flower_detail(request, pk):
     try:
         flower = Flower.objects.get(pk=pk)
@@ -45,6 +45,14 @@ def flower_detail(request, pk):
     if request.method == 'GET':
         serializer = FlowerSerializer(flower)
         return Response(serializer.data)
+
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = FlowerSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
 
     elif request.method == 'PUT':
         data = JSONParser().parse(request)

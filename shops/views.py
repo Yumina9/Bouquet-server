@@ -1,3 +1,4 @@
+
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -12,6 +13,8 @@ from bouquets.models import Bouquet
 from bouquets.serializers import BouquetSerializer
 from ribbons.serializers import RibbonSerializer
 from wrappingPapers.serializers import WrappingPaperSerializer
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
 
 @api_view(['GET'])
 def shop_list(request):
@@ -175,4 +178,15 @@ def shop_bouquet_detail(request, shops_id, id):
     elif request.method == 'DELETE':
         bouquet.delete()
         return Response(status=204)
-        
+    
+
+
+class MyShop(APIView):
+
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, format=None):
+        shop = Shop.objects.get(user=request.user)
+        serializer = ShopSerializer(shop)
+        return Response(data=serializer.data, status=200)
+
