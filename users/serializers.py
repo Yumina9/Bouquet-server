@@ -8,7 +8,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'email', 'username', 'first_name', 'user_choice', 'user_phone', 'shop','bouquet_order')
+        fields = ('id', 'email', 'username', 'first_name', 'user_choice', 'user_phone', 'shop','bouquet_order', 'profile_img',)
         # fields = "__all__"
 
     bouquet_order = serializers.SerializerMethodField(source='bouquet_order_set', read_only=True)
@@ -17,6 +17,8 @@ class UserSerializer(serializers.ModelSerializer):
         query= Bouquet_order.objects.filter(shops__id=obj.id)[:5]
         serializer = BouquetOrderSerializer(query, many=True)
         return serializer.data
+
+    
 
 class CustomUserSerializer(serializers.ModelSerializer):
     """
@@ -31,7 +33,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = User
-        fields = ('email', 'username', 'password', 'user_choice', 'user_phone')
+        fields = ('email', 'username', 'password', 'user_choice', 'user_phone', 'profile_img',)
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):

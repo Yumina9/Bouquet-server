@@ -59,6 +59,6 @@ class ShopSerializer(serializers.ModelSerializer):
         return serializer.data
 
     def get_bouquet_order(self, obj):
-        query= Bouquet_order.objects.filter(shops__id=obj.id)[:5]
+        query= Bouquet_order.objects.select_related('bouquet').select_related('flower').filter(shops__id=obj.id)
         serializer = BouquetOrderSerializer(query, many=True)
         return serializer.data

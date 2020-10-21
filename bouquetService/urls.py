@@ -44,12 +44,12 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('shops.urls')),
-    path('flowers/', include('flowers.urls')),
-    path('bouquets/', include('bouquets.urls')),
-    path('ribbons/', include('ribbons.urls')),
-    path('wrappingPapers/', include('wrappingPapers.urls')),
-    path('bouquet_order/', include('bouquet_order.urls')),
+    path('api/shop/', include('shops.urls')),
+    path('api/flowers/', include('flowers.urls')),
+    path('api/bouquets/', include('bouquets.urls')),
+    path('api/ribbons/', include('ribbons.urls')),
+    path('api/wrappingPapers/', include('wrappingPapers.urls')),
+    path('api/bouquet_order/', include('bouquet_order.urls')),
     # API
     path('api/user/', include('users.urls', namespace='users')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),

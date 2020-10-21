@@ -15,7 +15,7 @@ class UserAdminConfig(UserAdmin):
     list_display = ('email', 'username', 'first_name', 'user_choice', 'user_phone', 'shop')
     #admin/users/선택후 변경이 가능한 화면
     fieldsets = (
-        (None, {'fields': ('email', 'username', 'first_name','user_choice', 'user_phone', 'shop')}),
+        (None, {'fields': ('email', 'username', 'first_name','user_choice', 'user_phone', 'shop', 'profile_img',)}),
         ('Permissions', {'fields': ('is_staff', 'is_active')}),
         ('Personal', {'fields': ('about',)}),
     )
@@ -25,7 +25,7 @@ class UserAdminConfig(UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'username', 'first_name', 'password1', 'password2','user_choice', 'user_phone', 'shop',)}
+            'fields': ('email', 'username', 'first_name', 'password1', 'password2','user_choice', 'user_phone', 'shop', 'profile_img', )}
          ),
     )
 

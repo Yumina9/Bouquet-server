@@ -61,6 +61,8 @@ class User(AbstractBaseUser, PermissionsMixin):
         blank=True
     )
 
+    profile_img = models.ImageField(upload_to="image", null=True, blank=True)
+
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'first_name']
