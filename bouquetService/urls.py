@@ -31,7 +31,7 @@ from rest_framework import routers, permissions
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="YOGAYO OPEN API 명세서",
+        title="BOUQUET OPEN API 명세서",
         default_version='v1',
         description="부케서비스 OPEN API 입니다.",
         terms_of_service="https://www.google.com/policies/terms/",
