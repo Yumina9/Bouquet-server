@@ -4,7 +4,8 @@ from rest_framework.response import Response
 from flowers.models import Flower
 from flowers.serializers import FlowerSerializer
 from rest_framework.decorators import api_view, renderer_classes
-
+from rest_framework import generics, viewsets
+from rest_framework.views import APIView
 
 @api_view(['GET'])
 def flower_list(request):
@@ -57,3 +58,36 @@ def flower_detail(request, pk):
     elif request.method == 'DELETE':
         flower.delete()
         return Response(status=204)
+
+class ShopFlowerView(viewsets.ModelViewSet):
+    queryset = Flower.objects.all()
+    serializer_class = FlowerSerializer
+
+class FlowerList(APIView):
+    def get(self, request):
+        flowers = Flower.objects.all()
+        serializer = FlowerSerializer(flowers, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = FlowerSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CRATED)
+        return Response(serializer.error, status=status.HTTP_400_BAE_REQUESET)
+
+        
+class FlowerList(generics.ListCreateAPIView):
+    serializer_class = FlowerSerializer
+
+    def perform_create(self, serializer):
+        serializer.save()
+
+    def get_queryset(self):
+        queryset = Flower.objects.all()
+        return Flower.objects.all()
+
+# class FlowerDetail
+class FlowerDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Flower.objects.all()
+    serializer_class = FlowerSerializer
