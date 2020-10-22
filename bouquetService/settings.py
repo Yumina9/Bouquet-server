@@ -180,7 +180,8 @@ REST_FRAMEWORK = {
 }
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000"
+    "http://localhost:3000",
+    "https://flamingo.jnarin.com"
 ]
 
 # Custom user model
