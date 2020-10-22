@@ -14,7 +14,6 @@ class BouquetOrderSerializer(serializers.ModelSerializer):
     flower = serializers.SerializerMethodField(
         source='flower', read_only=True)
 
-
     class Meta:
         model = Bouquet_order
         fields = '__all__'

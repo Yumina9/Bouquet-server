@@ -2,8 +2,6 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-
-# DRF(Django Rest Framework)에서 제공해주는 API 제너릭 뷰 참조
 from rest_framework import generics
 from .models import Bouquet_order
 from .serializers import BouquetOrderSerializer
@@ -36,7 +34,6 @@ class bouquet_order_list(generics.ListCreateAPIView):
     queryset = Bouquet_order.objects.all()
     serializer_class = BouquetOrderSerializer
 
-    
     def perform_create(self, serializer):
 
         # request.data에는 axios의 post요청에서 담아서 보낸 데이터들 키값으로 그대로 들어오게 되어있어
@@ -46,7 +43,6 @@ class bouquet_order_list(generics.ListCreateAPIView):
         price = self.request.data['resultPrice'] if self.request.data['bouquet_id'] else 0
 
         serializer.save(users=self.request.user, shops=shop, bouquet=bouquet, flower=flower, price=price)
-
 
 class bouquet_order_detail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Bouquet_order.objects.all()

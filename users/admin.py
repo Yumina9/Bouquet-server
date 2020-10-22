@@ -5,7 +5,6 @@ from django.forms import TextInput, Textarea, CharField
 from django import forms
 from django.db import models
 
-
 class UserAdminConfig(UserAdmin):
     model = User
     search_fields = ('email', 'username', 'first_name')
@@ -28,6 +27,5 @@ class UserAdminConfig(UserAdmin):
             'fields': ('email', 'username', 'first_name', 'password1', 'password2','user_choice', 'user_phone', 'shop', 'profile_img', )}
          ),
     )
-
 
 admin.site.register(User, UserAdminConfig)

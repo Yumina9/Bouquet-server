@@ -19,6 +19,3 @@ class Bouquet_order(models.Model):
     ribbon = models.CharField(max_length=100, blank=True)
     wrappingPaper = models.CharField(max_length=100, blank=True)
     price = models.IntegerField(default=0)
-
-    # def __str__(self):
-    #     return self.shops.name +"의" +self.bouquet.name

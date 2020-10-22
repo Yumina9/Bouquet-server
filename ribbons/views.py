@@ -7,7 +7,6 @@ from rest_framework.decorators import api_view, renderer_classes
 
 @api_view(['GET'])
 def ribbon_list(request):
-    # Query Parameter
     limit = None
 
     try:

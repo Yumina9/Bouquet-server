@@ -5,10 +5,9 @@ from wrappingPapers.models import WrappingPaper
 from wrappingPapers.serializers import WrappingPaperSerializer
 from rest_framework.decorators import api_view, renderer_classes
 
-
 @api_view(['GET'])
 def wrappingPaper_list(request):
-    # Query Parameter
+    
     limit = None
 
     try:

@@ -15,7 +15,6 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework import status,permissions
 from rest_framework.permissions import IsAuthenticated
 
-
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
@@ -23,17 +22,12 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         
         data['access'] = str(refresh.access_token)
         data['refresh'] = str(refresh)
-
-        # Add extra responses here
         data['id'] = self.user.id
         data['email'] = self.user.email
         data['username'] = self.user.username
-        
-        # 사용자 타입 추가하기
 
         return data
 
-# class userCoice()
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 

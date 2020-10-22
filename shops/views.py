@@ -27,7 +27,6 @@ def shop_list(request):
         shops = Shop.objects.all()
         serializer = ShopSerializer(shops, many=True)
         return Response(data=serializer.data, status = 200)
-        # return JsonResponse(serializer.data, safe=False)
 
     elif request.method == 'POST':
         data = JSONParser().parse(request)
@@ -49,7 +48,6 @@ def shop_detail(request, pk):
     if request.method == 'GET':
         serializer = ShopSerializer(shop)
 
-        # print(serializer.data)
         return Response(serializer.data)
 
     elif request.method == 'PUT':
@@ -179,8 +177,6 @@ def shop_bouquet_detail(request, shops_id, id):
         bouquet.delete()
         return Response(status=204)
     
-
-
 class MyShop(APIView):
 
     permission_classes = [IsAuthenticated]

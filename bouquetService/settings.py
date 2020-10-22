@@ -12,21 +12,14 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 from datetime import timedelta
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'b_jks7b79&x*2-a*0d=c2k(uc3iy#c$4+$+5qcrbzk#c!on#o@'
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -48,8 +41,6 @@ INSTALLED_APPS = [
     'django_extensions',
     'drf_yasg',
     'storages',
-    
-
 ]
 
 MIDDLEWARE = [
@@ -99,21 +90,8 @@ DATABASES = {
             'init_command': "SET sql_mode = 'STRICT_TRANS_TABLES'",
         },
     }
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': 'bouquetService',
-    #     'USER': 'root',
-    #     'PASSWORD': '0609',
-    #     'HOST': '127.0.0.1',
-    #     'PORT': '3306',
-    #     'OPTIONS': {
-    #         'init_command': "SET sql_mode = 'STRICT_TRANS_TABLES'",
-    #     },
-    # }
-}
 
-# Password validation
-# https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
+}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -134,9 +112,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Internationalization
-# https://docs.djangoproject.com/en/3.0/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Asia/Seoul'
@@ -146,12 +121,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = False
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.0/howto/static-files/
-
-# STATIC_URL = '/static/'
-# MEDIA_URL = '/media/'
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -169,7 +138,6 @@ AZURE_CUSTOM_DOMAIN = f'bouquetserviceimage.blob.core.windows.net'
 STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
 MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{MEDIA_LOCATION}/'
 
-
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
@@ -183,7 +151,6 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000"
 ]
 
-# Custom user model
 AUTH_USER_MODEL = "users.User"
 
 SIMPLE_JWT = {
@@ -196,7 +163,6 @@ SIMPLE_JWT = {
     'VERIFYING_KEY': None,
     'AUTH_HEADER_TYPES': ('JWT',),
     'USER_ID_FIELD': 'email',
-    # 'USER_ID_CLAIM': 'user_id',
     'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
     'TOKEN_TYPE_CLAIM': 'token_type',
 }
