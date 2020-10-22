@@ -9,7 +9,6 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'email', 'username', 'first_name', 'user_choice', 'user_phone', 'shop','bouquet_order', 'profile_img',)
-        # fields = "__all__"
 
     bouquet_order = serializers.SerializerMethodField(source='bouquet_order_set', read_only=True)
 
@@ -25,7 +24,6 @@ class CustomUserSerializer(serializers.ModelSerializer):
     Currently unused in preference of the below.
     """
     email = serializers.EmailField(required=True)
-    # user_id = serializers.CharField(required=True)
     username = serializers.CharField(required=True)
     password = serializers.CharField(min_length=8, write_only=True)
     user_choice = serializers.CharField(max_length=1)
@@ -38,7 +36,6 @@ class CustomUserSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         password = validated_data.pop('password', None)
-        # as long as the fields are the same, we can just use this
         instance = self.Meta.model(**validated_data)
         if password is not None:
             instance.set_password(password)

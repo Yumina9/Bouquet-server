@@ -51,8 +51,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
     user_choice = models.CharField(max_length=1, choices=USER_CHOICE, null=True)
     user_phone = models.CharField(max_length=13, null=True, blank=True)
-    
-
 
     shop = models.OneToOneField(
         Shop,

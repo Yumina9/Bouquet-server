@@ -1,7 +1,6 @@
 from django.db import models
 from shops.models import Shop
 
-
 class WrappingPaper(models.Model):
     name = models.CharField(max_length=100)
     img = models.ImageField(upload_to="image")

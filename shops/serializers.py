@@ -47,7 +47,6 @@ class ShopSerializer(serializers.ModelSerializer):
         serializer = FlowerSerializer(query, many=True)
         return serializer.data
 
-    # 여기가 없어쑴
     def get_ribbons(self, obj):
         query = Ribbon.objects.filter(shops__id=obj.id)[:3]
         serializer = RibbonSerializer(query, many=True)
