@@ -13,9 +13,15 @@ class UserSerializer(serializers.ModelSerializer):
     bouquet_order = serializers.SerializerMethodField(source='bouquet_order_set', read_only=True)
 
     def get_bouquet_order(self, obj):
-        query= Bouquet_order.objects.filter(shops__id=obj.id)[:5]
+        print("objobj",obj);
+        if obj.user_choice == 'U':
+            query= Bouquet_order.objects.filter(users__id=obj.id)   
+        elif obj.user_choice == 'S':
+            query= Bouquet_order.objects.filter(shops__user__id=obj.id)
         serializer = BouquetOrderSerializer(query, many=True)
         return serializer.data
+
+
 
     
 
